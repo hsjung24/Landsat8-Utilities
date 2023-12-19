@@ -15,7 +15,7 @@ conda install -r requirements.txt
 
 - Clone the repository
 ```
-git clone 
+git clone https://github.com/hsjung24/Landsat8-Utilities.git
 ```
 - Go into the cloned folder
 ```
