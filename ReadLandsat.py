@@ -66,11 +66,11 @@ class TOA_REFLECTANCE(object):
         TOA_REFLECTANCE = (M_sf*BAND_DN+A_sf)/np.sin(np.pi/180*theta_sol)
         lon, lat = self.utm2lonlat()
         # Save the Files in ./output/Filename
-        with open(self.output_dir + '/TOA_Reflectance_{}.npy'.format(self.filename), 'wb') as f:
+        with open(self.output_dir + '/TOA_Reflectance.npy', 'wb') as f:
             np.save(f, TOA_REFLECTANCE)
-        with open(self.output_dir + '/longitude_{}.npy'.format(self.filename), 'wb') as f:
+        with open(self.output_dir + '/longitude.npy', 'wb') as f:
             np.save(f, lon)
-        with open(self.output_dir + '/latitude_{}.npy'.format(self.filename), 'wb') as f:
+        with open(self.output_dir + '/latitude.npy', 'wb') as f:
             np.save(f, lat)
     
 
