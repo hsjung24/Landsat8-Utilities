@@ -37,7 +37,7 @@ python main.py --filename "filename" --Band_Number "Band_Number" --confidence "h
 - Output Numpy arrays will be saved in the **output** folder under the same name as the input file containing...
   - ***TOA_Reflectance.npy***: Spectral op-of-atmosphere reflectance
   - ***longitude.npy***: Longitude coordinate of each pixel
-  - ***Latitude.npy**: Latitude coordinate of each pixel
+  - ***latitude.npy***: Latitude coordinate of each pixel
 ```
 ./output/Landsat_8_Filename
 ```
