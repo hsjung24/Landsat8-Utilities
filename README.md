@@ -34,7 +34,8 @@ python main.py --filename "filename" --Band_Number "Band_Number"
 python main.py --filename "filename" --Band_Number "Band_Number" --confidence "low"   #low confidence
 python main.py --filename "filename" --Band_Number "Band_Number" --confidence "high"  #high confidence
 ```
-- Output Numpy arrays will be saved in the **output** folder under the same name as the input file containing...
+- Output Numpy arrays will be saved in the **output** folder under the same name as the input file containing
+
   - ***TOA_Reflectance.npy***: Spectral op-of-atmosphere reflectance
   - ***longitude.npy***: Longitude coordinate of each pixel
   - ***latitude.npy***: Latitude coordinate of each pixel
