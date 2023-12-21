@@ -14,11 +14,7 @@ import warnings
 
 class TOA_REFLECTANCE(object):
     
-    ''' Initialize Class by Specifying
-        1. Filename
-        2. Band Number: 1~9
-        3. Mask Confidence: 'high', 'medium', 'low'
-    '''
+   
     def __init__(self, Band_Number, region, input_dir = './input', loc_cloud = './cloud_label'):
         self.Band_Number = Band_Number
         self.confidence = None
@@ -27,11 +23,7 @@ class TOA_REFLECTANCE(object):
         self.filename = os.path.basename(input_dir)
         self.loc_cloud = loc_cloud # For Me: '/home/junghs/Sea_Ice/data/CloudMask_validation/eye_comparison
         
-    ''' Will Return
-        1. Spectral TOA Reflectance: [nx, ny]
-        2. Longitude: [nx, ny]
-        3. Latitude: [nx, ny] 
-    '''
+
     # Retrieve Landsat Band TOA Reflectance
     def ReadLandsat(self):
         # Raw Band Information
