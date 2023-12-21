@@ -1,6 +1,8 @@
-# Landsat 8 Utilities
+# Landsat 8 Sea Ice Concentration
 
-Code to read Landsat 8 band images and return the top-of-atmosphere (TOA) reflectance values in Numpy array format
+Code to read Landsat 8 band images 
+and calculate the Sea Ice Concentration (SIC) in 6.25, 12.5, and 25 km Polar Stereographic Format
+using methods suggested in Tanaka and Lu (2023)
 
 ## Environment Setup
 
@@ -19,29 +21,27 @@ git clone https://github.com/hsjung24/Landsat8-Utilities.git
 ```
 - Go into the cloned folder
 ```
-cd Landsat8-Utilities
+cd Landsat8_Sea_Ice_Concentration
 ```
-- Place the Landsat-8 Level 1 Data files in the **data** folder
+- Place the Landsat-8 Level 1 Data files in the **input** folder
 ```
-./data/Landsat_8_Filename
+# Directory Structure should be the same as shown
+  1. region: Name of the sub-regions of the Arctic Sea
+  2. date: Acquisition date in YYYYMMDD Format
+
+./input/region/date/Landsat_8_Filename
 ```
 - Run **main.py** with specified arguments
 ```
-# For default Cloud Mask Confidence (Medium)
-python main.py --filename "filename" --Band_Number "Band_Number"
+# For selection of resolution
+python main.py --region "region" --resolution "6.25"   #6.25 km resolution
+python main.py --region "region" --resolution "25" --ncritical "100000"   #25 km resolution
+# It is recommended to use larger values of ncritical for larger resolution to obtain better estimation of sea ice concentration
+```
+- Output values will be saved in the **output1** and **output2** folders
 
-# For selection of Cloud Mask Confidence
-python main.py --filename "filename" --Band_Number "Band_Number" --confidence "low"   #low confidence
-python main.py --filename "filename" --Band_Number "Band_Number" --confidence "high"  #high confidence
-```
-- Output Numpy arrays will be saved in the **output** folder under the same name as the input file containing
-
-  - ***TOA_Reflectance.npy***: Spectral op-of-atmosphere reflectance
-  - ***longitude.npy***: Longitude coordinate of each pixel
-  - ***latitude.npy***: Latitude coordinate of each pixel
-```
-./output/Landsat_8_Filename
-```
+  - ***./output1/SIC_Landsat_{filename}.npy***: 2D Numpy array of Landsat-8 Sea Ice Concentration
+  - ***./output2/Confidence_Interval_{}.pkl***: Dictionary containing the Confidence Interval Length for each calculated Landsat-8 Sea Ice Concentration
 
 
 
