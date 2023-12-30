@@ -137,21 +137,21 @@ class Collocation(object):
         ds['distribution'] = MEAN_RESAMPLE # Bootstrap Resample Mean Distribution
 
         # 3. Save SIC as SIC_Landsat_{filename}.npy --------------------------------------------------------------------------
-        if not os.path.isdir(os.path.join(self.output_dir1, self.region)):
-            path_region = os.path.join(self.output_dir1, self.region)
+        path_region = os.path.join(self.output_dir1, self.region)
+        if not os.path.isdir(path_region):  
             os.mkdir(path_region)
-        if not os.path.isdir(os.path.join(path_region, date)):
-            path_date = os.path.join(path_region, date)
+        path_date = os.path.join(path_region, date)
+        if not os.path.isdir(path_date):   
             os.mkdir(path_date)
         with open(os.path.join(path_date, 'SIC_Landsat_{}.npy'.format(filename)), 'wb') as f1:
             np.save(f1, SIC_Landsat)
 
         # 4. Save Confidence Interval as Confidence_Interval_{filename}.pkl --------------------------------------------------
-        if not os.path.isdir(os.path.join(self.output_dir2, self.region)):
-            path_region2 = os.path.join(self.output_dir2, self.region)
+        path_region2 = os.path.join(self.output_dir2, self.region)
+        if not os.path.isdir(path_region2):
             os.mkdir(path_region2)
-        if not os.path.isdir(os.path.join(path_region2, date)):
-            path_date2 = os.path.join(path_region2, date)
+        path_date2 = os.path.join(path_region2, date)
+        if not os.path.isdir(path_date2):
             os.mkdir(path_date2)
         with open(os.path.join(path_date2, 'Confidence_Interval_{}.pkl'.format(filename)), 'wb') as f2:
             pickle.dump(ds, f2)
