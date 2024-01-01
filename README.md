@@ -34,9 +34,11 @@ cd Landsat8_Sea_Ice_Concentration
 - Run **main.py** with specified arguments
 ```
 # For selection of resolution
-python main.py --region "region" --resolution "6.25"   #6.25 km resolution
-python main.py --region "region" --resolution "25" --ncritical "100000"   #25 km resolution
-# It is recommended to use larger values of ncritical for larger resolution to obtain better estimation of sea ice concentration
+python main.py --region "region" --resolution 6.25   # 6.25 km resolution
+python main.py --region "region" --resolution 25 --ncritical 100000    # 25 km resolution
+
+# For selection of the range of files you want to process
+python main.py --region "region" --resolution 6.25 --count_start 50 --count_end 100   # Will Generate SIC for files number 50 ~ 100
 ```
 - Output values will be saved in the **output1** and **output2** folders
 
