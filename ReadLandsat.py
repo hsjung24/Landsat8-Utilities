@@ -15,13 +15,16 @@ import warnings
 class TOA_REFLECTANCE(object):
     
    
-    def __init__(self, Band_Number, region, input_dir = './input', loc_cloud = './cloud_label'):
+    def __init__(self, Band_Number, region, input_dir, loc_cloud, count_start, count_end):
         self.Band_Number = Band_Number
         self.confidence = None
         self.region = region
         self.input_dir = input_dir # For Me: '/home/junghs/Sea_Ice/data/LANDSAT
         self.filename = os.path.basename(input_dir)
         self.loc_cloud = loc_cloud # For Me: '/home/junghs/Sea_Ice/data/CloudMask_validation/eye_comparison
+        self.count_start = count_start
+        self.count_end = count_end
+
         
 
     # Retrieve Landsat Band TOA Reflectance
@@ -146,12 +149,18 @@ class TOA_REFLECTANCE(object):
         loc_cloud = os.path.join(self.loc_cloud, '{}_Cloud_Contamination_Label.txt'.format(self.region))
         ccl = open(loc_cloud, 'r').read().split('\n')
         ccl = ccl[5:]
+        countrange = []
         underestimated = []
+        count = 1
         for item in ccl:
-            if len(item) != 0:
+            if len(item) != 0 and count >= self.count_start and count < self.count_end:
+                countrange.append(item[:40])
                 if item[41] == str(1):
                     underestimated.append(item[:40])
+            count += 1
+        countrange = np.array(countrange)
         underestimated = np.array(underestimated)
+
         # Cloud Contamination Labels 2
         loc_cloud2 = os.path.join(self.loc_cloud, '{}_Cloud_Contamination_Label2.txt'.format(self.region))
         ccl2 = open(loc_cloud2, 'r').read().split('\n')
@@ -161,9 +170,11 @@ class TOA_REFLECTANCE(object):
                 overestimated.append(item)
         overestimated = np.array(overestimated)
 
+        idx_range = np.where(countrange == self.filename, True, False)
         idx_under = np.where(underestimated == self.filename, True, False)
         idx_over = np.where(overestimated == self.filename, True, False)
-        if all(~idx_under):
+
+        if all(~idx_under) and any(idx_range):
             criteria = True
             if all(~idx_over):
                 self.confidence = 'medium'
